@@ -13,7 +13,7 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 * Pseudo Classical Patterns
 
 ## Steps to run
-* Run the index.html in the above location or just navigate to this [link]()
+* Run the index.html in the above location or just navigate to this [link](https://gvsvarun.github.io/forgger-game/)
 * The bugs are supposed to be avoided at all cost
 * The character you see is our hero.
 * We need to navigate him from our current location to the top by avoiding the bugs
