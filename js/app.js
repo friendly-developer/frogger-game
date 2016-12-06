@@ -79,6 +79,7 @@ Enemy.prototype.check_for_collision = function(x, y) {
 		max_speed = 15;
 		min_speed = 1;
 		send_enemies();
+		set_level(player);
 		player.sprite = 'images/char-boy.png';
 	}
 };
