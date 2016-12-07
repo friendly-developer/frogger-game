@@ -21,6 +21,11 @@ In this game you have a Player and Enemies (Bugs). The goal of the player is to 
 * The higher the level the tougher the challenge
 * >All The Best
 
+## How to play
+* Navigate using :arrow_up: , :arrow_right:, :arrow_down: and :arrow_left:
+* Try to cross the pavement to increase your level
+* Avoid hitting bugs at all costs
+
 ### MIT License
 
 Copyright (c) 2016 Varun G
