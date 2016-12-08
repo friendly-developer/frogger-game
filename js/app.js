@@ -51,21 +51,7 @@ Enemy.prototype.update = function(dt) {
 	}
 	this.check_for_collision(this.x, this.y);
 };
-/**
- * resets player to default location
- * @param  {[palyer object]} self
- */
-var reset_player = function(self) {
-	self.x = 200;
-	self.y = 365
-};
-/**
- * [sets current level in view]
- * @param {[player]} self
- */
-var set_level = function(self) {
-	document.querySelector('#level').innerHTML = self.level
-};
+
 /**
  * [check_for_collision, if so reset all the properties of the game ]
  * @param  {[type]} x [current location of x]
@@ -73,17 +59,27 @@ var set_level = function(self) {
  */
 Enemy.prototype.check_for_collision = function(x, y) {
 	if ((player.x < x + 10) && (player.x > x - 10) && (player.y < y + 10) && (player.y > y - 10)) {
-		reset_player(player);
+		player.reset_player();
 		player.level = 1;
 		allEnemies = [];
 		max_speed = 15;
 		min_speed = 1;
-		send_enemies();
-		set_level(player);
+		this.send_enemies();
+		player.set_level();
 		player.sprite = 'images/char-boy.png';
 	}
 };
 
+
+/**
+ * send a wave of enemies into the all enemies object
+ */
+Enemy.prototype.send_enemies = function() {
+	allEnemies.push(new First_row_enemy());
+	allEnemies.push(new Second_row_enemy());
+	allEnemies.push(new Third_row_enemy());
+};
+Enemy.send_enemies();
 /**
  * Creating Enemies for each row
  */
@@ -104,15 +100,6 @@ Third_row_enemy.prototype = Object.create(Enemy.prototype);
 Third_row_enemy.prototype.constructor = Third_row_enemy;
 
 
-/**
- * send a wave of enemies into the all enemies object
- */
-var send_enemies = function() {
-	allEnemies.push(new First_row_enemy());
-	allEnemies.push(new Second_row_enemy());
-	allEnemies.push(new Third_row_enemy());
-};
-send_enemies();
 
 /**
  * Our player object which controls the player
@@ -154,6 +141,20 @@ Player.prototype.handleInput = function(val) {
 Player.prototype.change_char = function() {
 	this.sprite = 'images/char-princess-girl.png';
 }
+/**
+ * resets player to default location
+ */
+Player.prototype.reset_player = function() {
+	this.x = 200;
+	this.y = 365
+};
+/**
+ * [sets current level in view]
+ * @param {[player]} self
+ */
+Player.prototype.set_level = function() {
+	document.querySelector('#level').innerHTML = this.level
+};
 //TODO :: Add jewels or bonus items once in a while for changing the character
 
 /**
@@ -173,11 +174,12 @@ Player.prototype.update = function(x, y) {
  */
 Player.prototype.check_if_won = function() {
 	if (this.y == -10) {
-		reset_player(this);
+		this.reset_player();
 		this.sprite = 'images/char-pink-girl.png';
 		this.level = this.level + 1;
-		set_level(this);
-		send_enemies();
+		this.set_level();
+		Enemy.send_enemies();
+		//Increasing max and min speed by 0.5
 		max_speed +=0.5;
 		min_speed+=0.5;
 	}
