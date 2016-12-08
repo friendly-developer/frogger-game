@@ -35,6 +35,14 @@ var Enemy = function(x, y) {
 	Character.call(this, x, y, sprite);
 };
 
+/**
+ * send a wave of enemies into the all enemies object
+ */
+var send_enemies = function() {
+	allEnemies.push(new First_row_enemy());
+	allEnemies.push(new Second_row_enemy());
+	allEnemies.push(new Third_row_enemy());
+};
 
 Enemy.prototype = Object.create(Character.prototype);
 
@@ -64,22 +72,15 @@ Enemy.prototype.check_for_collision = function(x, y) {
 		allEnemies = [];
 		max_speed = 15;
 		min_speed = 1;
-		this.send_enemies();
+		send_enemies();
 		player.set_level();
 		player.sprite = 'images/char-boy.png';
 	}
 };
 
 
-/**
- * send a wave of enemies into the all enemies object
- */
-Enemy.prototype.send_enemies = function() {
-	allEnemies.push(new First_row_enemy());
-	allEnemies.push(new Second_row_enemy());
-	allEnemies.push(new Third_row_enemy());
-};
-Enemy.send_enemies();
+
+
 /**
  * Creating Enemies for each row
  */
@@ -100,7 +101,7 @@ Third_row_enemy.prototype = Object.create(Enemy.prototype);
 Third_row_enemy.prototype.constructor = Third_row_enemy;
 
 
-
+send_enemies();
 /**
  * Our player object which controls the player
  */
@@ -178,7 +179,7 @@ Player.prototype.check_if_won = function() {
 		this.sprite = 'images/char-pink-girl.png';
 		this.level = this.level + 1;
 		this.set_level();
-		Enemy.send_enemies();
+		send_enemies();
 		//Increasing max and min speed by 0.5
 		max_speed +=0.5;
 		min_speed+=0.5;
